@@ -1,0 +1,89 @@
+<style>
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  li img {
+    max-width: 200px;
+    margin-bottom: 1rem;
+  }
+
+  li p {
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  li h2 {
+    font-size: 1.5rem;
+    margin: 0;
+    margin-bottom: 1rem;
+  }
+
+  li a {
+    margin-top: auto;
+    align-self: flex-end;
+    font-size: 1.2rem;
+  }
+
+  .no-universities {
+    font-size: 1.2rem;
+    color: #888;
+  }
+
+  .new-university {
+    display: block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.2rem;
+  }
+
+  .new-university:hover {
+    background-color: #0069d9;
+  }
+
+</style>
+
+<h1>Universities</h1>
+
+<% if @universities.any? %>
+  <ul>
+    <% @universities.each do |university| %>
+      <li>
+        <h2><%= university.name %></h2>
+        <% if university.logo.is_a?(ActiveStorage::Attached::One) && university.logo.attached? %>
+          <%= image_tag university.logo %>
+        <% else %>
+          <p>No logo available.</p>
+        <% end %>
+        <p><strong>Contact:</strong> <%= university.contact_info %></p>
+        <p><strong>About:</strong> <%= university.about %></p>
+        <%= link_to 'Edit', edit_university_path(university) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="no-universities">No universities found.</p>
+<% end %>
+
+<%= link_to 'New University', new_university_path, class: 'new-university' %>

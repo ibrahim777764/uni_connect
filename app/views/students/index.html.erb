@@ -1,0 +1,19 @@
+<h1 style="font-size: 36px; color: #333;">Students</h1>
+
+<% if @students.any? %>
+  <ul style="list-style-type: none; padding: 0; margin: 0;">
+    <% @students.each do |student| %>
+      <li style="border-bottom: 1px solid #ccc; padding: 10px 0;">
+        <div style="display: flex; align-items: center;">
+          <div style="flex-shrink: 0; width: 50px; height: 50px; background-color: #ccc; border-radius: 50%; margin-right: 10px;"></div>
+          <div>
+            <p style="font-size: 18px; color: #333; margin: 0;"><%= student.first_name %> <%= student.last_name %></p>
+            <p style="font-size: 14px; color: #666; margin: 0;"><%= student.email %></p>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p style="font-size: 16px; color: #666;">There are no students to display</p>
+<% end %>

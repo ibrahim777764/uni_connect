@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Uni Connect</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 50px;
+      text-align: center;
+    }
+    
+    h1 {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+    
+    p {
+      font-size: 24px;
+      margin-bottom: 40px;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 20px;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #fff;
+      text-decoration: none;
+    }
+    
+    .btn:hover {
+      background-color: #0062cc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to Uni Connect!</h1>
+    <p>Are you a student or a university?</p>
+    <a href="<%= register_student_path %>" class="btn">Register as a student</a>
+    <a href="<%= register_university_path %>" class="btn">Register as a university</a>
+  </div>
+</body>
+</html>
