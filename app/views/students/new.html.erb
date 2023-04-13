@@ -1,102 +1,138 @@
-<style>
-  h1 {
-    font-size: 2em;
-    margin-bottom: 20px;
-  }
-
-  form {
-    max-width: 500px;
-    margin: 0 auto;
-  }
-
-  .field {
-    margin-bottom: 20px;
-  }
-
-  label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-
-  input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 1em;
-  }
-
-  .actions {
-    text-align: center;
-  }
-
-  input[type="submit"] {
-    background-color: #0000FF;
-    color: #fff;
-    border-radius: 5px;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-  }
-
-  input[type="submit"]:hover {
-    background-color: #3e8e41;
-  }
-
-  #error_explanation {
-    color: red;
-    margin-bottom: 20px;
-  }
-
-  #error_explanation h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-  }
-
-  #error_explanation ul {
-    margin-bottom: 0;
-  }
-
-  #error_explanation li {
-    margin-bottom: 5px;
-  }
-</style>
-
-<div class="student-registration-form">
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Registration Form</title>
+  <style>
+    body {
+      background-color: #f2f2f2;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    h1 {
+      color: blue;
+      text-align: center;
+    }
+    
+    form {
+      background-color: white;
+      border-radius: 5px;
+      padding: 20px;
+      width: 500px;
+      margin: 0 auto;
+    }
+    
+    .field {
+      margin-bottom: 10px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    
+    input[type="text"], input[type="email"], input[type="number"], select {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    
+    input[type="submit"] {
+      background-color: blue;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    input[type="submit"]:hover {
+      background-color: darkblue;
+    }
+    
+    .field_with_errors {
+      color: red;
+    }
+  </style>
+</head>
+<body>
   <h1>Student Registration Form</h1>
 
-  <%= form_with(model: @student, url: students_path, local: true) do |form| %>
+  <%= form_with(model: @student, url: students_path, local: true, html: { autocomplete: "off" }) do |form| %>
+  
     <% if @student.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
         <ul>
-        <% @student.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
+          <% @student.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
         </ul>
       </div>
     <% end %>
-
+    
+    <div class="container">
+      <div class="field">
+        <%= form.label :first_name %>
+        <%= form.text_field :first_name, required: true %>
+        <% if @student.errors[:first_name].any? %>
+          <span class="field_with_errors"><%= @student.errors[:first_name].join(', ') %></span>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="field">
+        <%= form.label :last_name %>
+        <%= form.text_field :last_name, required: true %>
+        <% if @student.errors[:last_name].any? %>
+          <span class="field_with_errors"><%= @student.errors[:last_name].join(', ') %></span>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="field">
+        <%= form.label :email %>
+        <%= form.email_field :email, required: true %>
+        <% if @student.errors[:email].any? %>
+          <span class="field_with_errors"><%= @student.errors[:email].join(', ') %></span>
+        <% end %>
+      </div>
+    </div>
+    
     <div class="field">
-      <%= form.label :first_name %>
-      <%= form.text_field :first_name %>
-    </div>
-
-    <div class="field">
-      <%= form.label :last_name %>
-      <%= form.text_field :last_name %>
-    </div>
-
-    <div class="field">
-      <%= form.label :email %>
-      <%= form.text_field :email %>
-    </div>
-
-    <div class="actions">
-      <%= form.submit %>
-    </div>
+  <%= form.label :grade %>
+  <%= form.select :grade, options_for_select([['A+', 'A+'], ['A', 'A'], ['B+', 'B+'], ['B', 'B'], ['C', 'C'], ['D', 'D'], ['F', 'F']]), prompt: 'Select' %>
+  <% if @student.errors[:grade].any? %>
+    <span class="field_with_errors"><%= @student.errors[:grade].join(', ') %></span>
   <% end %>
 </div>
+
+<div class="field">
+  <%= form.label :high_school_name %>
+  <%= form.text_field :high_school_name, required: true %>
+  <% if @student.errors[:high_school_name].any? %>
+    <span class="field_with_errors"><%= @student.errors[:high_school_name].join(', ') %></span>
+  <% end %>
+</div>
+
+<div class="field">
+  <%= form.label :financial_problem do %>
+    Do you have any financial problems?
+  <% end %>
+  <%= form.check_box :financial_problem %>
+</div>
+
+<div class="actions">
+  <%= form.submit %>
+</div>
+
+<% end %>
+</body>
+</html>
