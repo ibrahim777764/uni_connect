@@ -35,7 +35,8 @@
       font-weight: bold;
       text-transform: uppercase;
       border-radius: 5px;
-      background-color: #007bff;
+      background-image: url('your-image-url-here');
+      background-size: cover;
       color: #fff;
       text-decoration: none;
     }
@@ -43,14 +44,71 @@
     .btn:hover {
       background-color: #0062cc;
     }
+    
+    .btn-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 20px;
+    }
+    
+    .service-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 400px;
+      background-color: #fff;
+      margin-top: 50px;
+    }
+    
+    .service {
+      flex-basis: 30%;
+      margin: 0 20px;
+      text-align: center;
+    }
+    
+    .service-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    
+    .service-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .service-description {
+      font-size: 18px;
+      line-height: 1.5;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Welcome to Uni Connect!</h1>
     <p>Are you a student or a university?</p>
-    <a href="<%= register_student_path %>" class="btn">Register as a student</a>
-    <a href="<%= register_university_path %>" class="btn">Register as a university</a>
+    <div class="btn-grid">
+      <a href="<%= register_student_path %>" class="btn">Register as a student</a>
+      <a href="<%= register_university_path %>" class="btn">Register as a university</a>
+    </div>
+  </div>
+  
+  <div class="service-container">
+    <div class="service">
+      <span class="service-icon">🎓</span>
+      <h2 class="service-title">University Search</h2>
+      <p class="service-description">Find the perfect university for you and your interests.</p>
+    </div>
+    <div class="service">
+      <span class="service-icon">📝</span>
+      <h2 class="service-title">Application Assistance</h2>
+      <p class="service-description">Get help with the university application process.</p>
+    </div>
+    <div class="service">
+      <span class="service-icon">💼</span>
+      <h2 class="service-title">Career Services</h2>
+      <p class="service-description">Get guidance and resources to help you find a job after graduation.</p>
+    </div>
   </div>
 </body>
 </html>
